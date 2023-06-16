@@ -19,7 +19,7 @@ if( CMAKE_CXX_STANDARD EQUAL 17 )
   option( HAVE_CXX17 "Using C++17" ON)
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
 
 include(QuickfixPlatformSettings)
 include(QuickfixPrebuildSetup)
@@ -33,18 +33,14 @@ option(HAVE_PYTHON2 "Build with default Python2 version")
 option(HAVE_PYTHON3 "Build with default Python3 version")
 
 #Make sure that a previous config.h has not undefined HAVE_SSL
-if(HAVE_SSL)
 # Can set location explicitly, example, cmake -DOPENSSL_ROOT_DIR=/usr/local/ssl -DOPENSSL_LIBRARIES=/usr/local/ssl/lib
-
 find_package(OpenSSL REQUIRED)
-include_directories(${OPENSSL_INCLUDE_DIR})
 
 message("-- OPENSSL_INCLUDE_DIR: ${OPENSSL_INCLUDE_DIR}")
 message("-- OPENSSL_LIBRARIES: ${OPENSSL_LIBRARIES}")
 message("-- OPENSSL_ROOT_DIR: ${OPENSSL_ROOT_DIR}")
 
 message("-- Building with SSL")
-endif()
 
 if(HAVE_MYSQL)
 find_package(MySQL REQUIRED)
@@ -103,10 +99,10 @@ if( WIN32)
 add_subdirectory(test)
 endif()
 
-configure_file(cmake_config.h.in ${CMAKE_SOURCE_DIR}/src/C++/config.h @ONLY)
-configure_file(cmake_config.h.in ${CMAKE_SOURCE_DIR}/include/quickfix/config.h @ONLY)
+configure_file(cmake_config.h.in ${PROJECT_SOURCE_DIR}/src/C++/config.h @ONLY)
+configure_file(cmake_config.h.in ${PROJECT_SOURCE_DIR}/include/quickfix/config.h @ONLY)
 file(REMOVE config.h)
 
 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/spec/ DESTINATION share/quickfix
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/spec/ DESTINATION share/quickfix
   FILES_MATCHING PATTERN "FIX*.xml")
