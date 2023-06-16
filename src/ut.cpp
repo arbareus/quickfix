@@ -55,7 +55,6 @@
 #include <SessionTestCase.cpp>
 #include <SessionFactoryTestCase.cpp>
 #include <SettingsTestCase.cpp>
-#include <SharedArrayTestCase.cpp>
 #include <SocketAcceptorTestCase.cpp>
 #include <SocketConnectionTestCase.cpp>
 #include <SocketConnectorTestCase.cpp>
