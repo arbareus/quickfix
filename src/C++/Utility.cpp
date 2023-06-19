@@ -128,7 +128,14 @@ socket_handle socket_createAcceptor(int port, bool reuse)
 
   address.sin_family = PF_INET;
   address.sin_port = htons( port );
-  address.sin_addr.s_addr = INADDR_ANY;
+  if (const auto localIp = std::getenv("DSL_BIND_IP"); localIp)
+  {
+      address.sin_addr.s_addr = inet_addr(localIp);
+  }
+  else
+  {
+      address.sin_addr.s_addr = INADDR_ANY;
+  }
   socklen = sizeof( address );
   if( reuse )
     socket_setsockopt( socket, SO_REUSEADDR );
