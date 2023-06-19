@@ -65,12 +65,7 @@ if (WIN32)
   set_target_properties (${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX d)
   target_link_libraries(${PROJECT_NAME} ${OPENSSL_LIBRARIES} ${MYSQL_CLIENT_LIBS} ${PostgreSQL_LIBRARIES} ws2_32)
 else()
-
-  if (BUILD_SHARED_LIBS)
-    add_library(${PROJECT_NAME} SHARED  ${quickfix_SOURCES})
-  else ()
-    add_library(${PROJECT_NAME} STATIC  ${quickfix_SOURCES})
-  endif ()
+  add_library(${PROJECT_NAME} STATIC  ${quickfix_SOURCES})
   target_link_libraries(${PROJECT_NAME} ${OPENSSL_LIBRARIES} ${MYSQL_CLIENT_LIBS} ${PostgreSQL_LIBRARIES} pthread)
 endif()
 
