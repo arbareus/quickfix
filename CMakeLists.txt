@@ -1,13 +1,7 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
-option(HAVE_EMX "Build with EMX")
 
-if(HAVE_EMX)
-  message("-- Building with EMX")
-  set (quickfix_PROJECT_NAME quickfix-emx)
-else()
-  set (quickfix_PROJECT_NAME quickfix)
-endif()
+set (quickfix_PROJECT_NAME quickfix)
 
 project(${quickfix_PROJECT_NAME} VERSION 0.1 LANGUAGES CXX C)
 message("-- Project name ${CMAKE_PROJECT_NAME}")
@@ -77,30 +71,15 @@ if (HAVE_UNIQUE_PTR_IN_STD_NAMESPACE)
   option( HAVE_STD_UNIQUE_PTR "HAVE_STD_UNIQUE_PTR" ON)
 endif()
 
-if (HAVE_PYTHON)
-  find_package(PythonLibs REQUIRED)
-  include_directories(${PYTHON_INCLUDE_DIRS})
-elseif (HAVE_PYTHON2)
-  find_package(PythonLibs 2 REQUIRED)
-  include_directories(${PYTHON_INCLUDE_DIRS})
-elseif (HAVE_PYTHON3)
-  find_package(PythonLibs 3 REQUIRED)
-  include_directories(${PYTHON_INCLUDE_DIRS})
-endif ()
 
-if( WIN32 OR ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" OR ${CMAKE_SYSTEM_NAME} STREQUAL "Darwin" )
 add_subdirectory(UnitTest++)
-endif()
 
 add_subdirectory(src)
 add_subdirectory(examples)
-if( WIN32)
-add_subdirectory(test)
-endif()
 
 configure_file(cmake_config.h.in ${PROJECT_SOURCE_DIR}/src/quickfix/config.h @ONLY)
 file(REMOVE config.h)
 
 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/spec/ DESTINATION share/quickfix
-  FILES_MATCHING PATTERN "FIX*.xml")
+  FILES_MATCHING PATTERN "*.xml")
