@@ -22,7 +22,6 @@ endif()
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
 
 include(QuickfixPlatformSettings)
-include(QuickfixPrebuildSetup)
 
 # Call cmake with-DHAVE_SSL=ON to compile with SSL. Similarly for others.
 option(HAVE_SSL "Build with SSL")
@@ -99,8 +98,7 @@ if( WIN32)
 add_subdirectory(test)
 endif()
 
-configure_file(cmake_config.h.in ${PROJECT_SOURCE_DIR}/src/C++/config.h @ONLY)
-configure_file(cmake_config.h.in ${PROJECT_SOURCE_DIR}/include/quickfix/config.h @ONLY)
+configure_file(cmake_config.h.in ${PROJECT_SOURCE_DIR}/src/quickfix/config.h @ONLY)
 file(REMOVE config.h)
 
 

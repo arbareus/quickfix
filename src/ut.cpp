@@ -24,8 +24,8 @@
 #include "config.h"
 #endif
 
-#include "C++/Utility.h"
-#include "C++/SessionSettings.h"
+#include "Utility.h"
+#include "SessionSettings.h"
 #ifndef _MSC_VER
 #include <DataDictionaryProviderTestCase.cpp>
 #include <DataDictionaryTestCase.cpp>
