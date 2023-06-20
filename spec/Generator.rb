@@ -32,7 +32,3 @@ generateVersion( "FIXT", 1, 1, 0, 0, aggregator )
 (0..4).each { |i| generateVersion( "FIX", 4, i, 0, 0, aggregator ) }
 (0..0).each { |i| generateVersion( "FIX", 4, i, 0, 0, aggregator ) }
 (0..2).each { |i| generateVersion( "FIX", 5, 0, i, i + 7, aggregator ) }
-
-Processor.new("FIX44.bitstamp.xml", [aggregator]).processFields
-bitstampCpp = GeneratorCPP.new("FIX", 4.to_s, 4.to_s, 0.to_s, 0.to_s, "../src/quickfix", "bitstamp")
-Processor.new("FIX44.bitstamp.xml", [bitstampCpp]).process( aggregator )

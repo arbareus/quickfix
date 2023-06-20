@@ -81,7 +81,7 @@ namespace FIX
   DEFINE_QTY(CumQty);
   DEFINE_CURRENCY(Currency);
   DEFINE_STRING(ExecID);
-  DEFINE_MULTIPLEVALUESTRING(ExecInst);
+  DEFINE_MULTIPLECHARVALUE(ExecInst);
   DEFINE_STRING(ExecRefID);
   DEFINE_CHAR(ExecTransType);
   DEFINE_CHAR(HandlInst);
@@ -173,7 +173,7 @@ namespace FIX
   DEFINE_NUMINGROUP(NoMiscFees);
   DEFINE_AMT(MiscFeeAmt);
   DEFINE_CURRENCY(MiscFeeCurr);
-  DEFINE_CHAR(MiscFeeType);
+  DEFINE_STRING(MiscFeeType);
   DEFINE_PRICE(PrevClosePx);
   DEFINE_NUMINGROUP(NoRelatedSym);
   DEFINE_STRING(Subject);
@@ -265,8 +265,8 @@ namespace FIX
   DEFINE_UTCTIMEONLY(MDEntryTime);
   DEFINE_CHAR(TickDirection);
   DEFINE_EXCHANGE(MDMkt);
-  DEFINE_MULTIPLEVALUESTRING(QuoteCondition);
-  DEFINE_MULTIPLEVALUESTRING(TradeCondition);
+  DEFINE_MULTIPLESTRINGVALUE(QuoteCondition);
+  DEFINE_MULTIPLESTRINGVALUE(TradeCondition);
   DEFINE_STRING(MDEntryID);
   DEFINE_CHAR(MDUpdateAction);
   DEFINE_STRING(MDEntryRefID);
@@ -280,8 +280,8 @@ namespace FIX
   DEFINE_STRING(MDEntryBuyer);
   DEFINE_STRING(MDEntrySeller);
   DEFINE_INT(MDEntryPositionNo);
-  DEFINE_MULTIPLEVALUESTRING(FinancialStatus);
-  DEFINE_MULTIPLEVALUESTRING(CorporateAction);
+  DEFINE_MULTIPLECHARVALUE(FinancialStatus);
+  DEFINE_MULTIPLECHARVALUE(CorporateAction);
   DEFINE_QTY(DefBidSize);
   DEFINE_QTY(DefOfferSize);
   DEFINE_NUMINGROUP(NoQuoteEntries);
@@ -554,10 +554,10 @@ namespace FIX
   DEFINE_STRING(SecondaryClOrdID);
   DEFINE_STRING(SecondaryExecID);
   DEFINE_CHAR(OrderCapacity);
-  DEFINE_MULTIPLEVALUESTRING(OrderRestrictions);
+  DEFINE_MULTIPLECHARVALUE(OrderRestrictions);
   DEFINE_CHAR(MassCancelRequestType);
   DEFINE_CHAR(MassCancelResponse);
-  DEFINE_CHAR(MassCancelRejectReason);
+  DEFINE_INT(MassCancelRejectReason);
   DEFINE_INT(TotalAffectedOrders);
   DEFINE_NUMINGROUP(NoAffectedOrders);
   DEFINE_STRING(AffectedOrderID);
@@ -571,7 +571,7 @@ namespace FIX
   DEFINE_STRING(InstrRegistry);
   DEFINE_CHAR(CashMargin);
   DEFINE_STRING(NestedPartySubID);
-  DEFINE_MULTIPLEVALUESTRING(Scope);
+  DEFINE_MULTIPLECHARVALUE(Scope);
   DEFINE_BOOLEAN(MDImplicitDelete);
   DEFINE_STRING(CrossID);
   DEFINE_INT(CrossType);
@@ -680,12 +680,12 @@ namespace FIX
   DEFINE_STRING(SideComplianceID);
   DEFINE_STRING(IOIID);
   DEFINE_NUMINGROUP(NoLinesOfText);
-  DEFINE_CHAR(SettlType);
+  DEFINE_STRING(SettlType);
   DEFINE_LOCALMKTDATE(SettlDate);
   DEFINE_INT(AvgPxPrecision);
   DEFINE_LOCALMKTDATE(SettlDate2);
   DEFINE_FLOAT(PegOffsetValue);
-  DEFINE_MULTIPLEVALUESTRING(OpenCloseSettlFlag);
+  DEFINE_MULTIPLECHARVALUE(OpenCloseSettlFlag);
   DEFINE_INT(TotNoQuoteEntries);
   DEFINE_FLOAT(DiscretionOffsetValue);
   DEFINE_INT(TotNoRelatedSym);
