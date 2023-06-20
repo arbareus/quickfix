@@ -1,11 +1,11 @@
 require 'PrintFile'
 
 class GeneratorCPP
-  def initialize(type, major, minor, sp, verid, basedir, innerdir = "")
+  def initialize(type, major, minor, sp, verid, basedir)
     @type = type
     @major = major
     @minor = minor
-    @namespace = type + major + minor + innerdir
+    @namespace = type + major + minor
     if( sp != "0" )
       @namespace += "SP#{sp}"
     end
