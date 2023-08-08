@@ -220,6 +220,12 @@ void SocketInitiator::onTimeout( SocketConnector& )
   time_t now;
   ::time( &now );
 
+  if (m_lastConnect > now)
+  {
+    // We've tried to connect in the future. This shouldn't be possible
+    m_lastConnect = now;
+  }
+
   if ( (now - m_lastConnect) >= m_reconnectInterval )
   {
     connect();
