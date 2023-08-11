@@ -83,8 +83,14 @@ Session* SessionFactory::create( const SessionID& sessionID,
   int endDay = -1;
   try
   {
-    startDay = settings.getDay( START_DAY );
-    endDay = settings.getDay( END_DAY );
+    if(settings.has( START_DAY ))
+    {
+        startDay = settings.getDay( START_DAY );
+    }
+    if(settings.has( END_DAY ))
+    {
+        endDay = settings.getDay( END_DAY );
+    }
   }
   catch( ConfigError & ) {}
   catch( FieldConvertError & e ) { throw ConfigError( e.what() ); }
@@ -131,8 +137,14 @@ Session* SessionFactory::create( const SessionID& sessionID,
   int logoutDay = endDay;
   try
   {
-    logonDay = settings.getDay( LOGON_DAY );
-    logoutDay = settings.getDay( LOGOUT_DAY );
+    if(settings.has( LOGON_DAY ))
+    {
+        logonDay = settings.getDay( LOGON_DAY );
+    }
+    if(settings.has(LOGOUT_DAY))
+    {
+        logoutDay = settings.getDay( LOGOUT_DAY );
+    }
   }
   catch( ConfigError & ) {}
   catch( FieldConvertError & e ) { throw ConfigError( e.what() ); }
@@ -141,15 +153,21 @@ Session* SessionFactory::create( const SessionID& sessionID,
   UtcTimeOnly logoutTime( endTime );
   try
   {
-    logonTime = UtcTimeOnlyConvertor::convert
-                ( settings.getString( LOGON_TIME ) );
+    if(settings.has( LOGON_TIME ))
+    {
+        logonTime = UtcTimeOnlyConvertor::convert
+            ( settings.getString( LOGON_TIME ) );
+    }
   }
   catch( ConfigError & ) {}
   catch( FieldConvertError & e ) { throw ConfigError( e.what() ); }
   try
   {
-    logoutTime = UtcTimeOnlyConvertor::convert
-              ( settings.getString( LOGOUT_TIME ) );
+    if(settings.has( LOGOUT_TIME ))
+    {
+        logoutTime = UtcTimeOnlyConvertor::convert
+            ( settings.getString( LOGOUT_TIME ) );
+    }
   }
   catch( ConfigError & ) {}
   catch( FieldConvertError & e ) { throw ConfigError( e.what() ); }
