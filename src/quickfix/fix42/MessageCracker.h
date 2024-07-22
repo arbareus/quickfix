@@ -225,12 +225,25 @@ namespace FIX42
  virtual void onMessage( ListStrikePrice&, const FIX::SessionID& ) {} 
 
 public:
-  void crack( const Message& message, 
-              const FIX::SessionID& sessionID )
+  void crack( const Message& message, const FIX::SessionID& sessionID )
   {
-    const std::string& msgTypeValue 
-      = message.getHeader().getField( FIX::FIELD::MsgType );
-    
+    const std::string& msgTypeValue = message.getHeader().getField( FIX::FIELD::MsgType );
+
+    if( msgTypeValue == "8" )
+        onMessage( (const ExecutionReport&)message, sessionID );
+    else
+    if( msgTypeValue == "X" )
+        onMessage( (const MarketDataIncrementalRefresh&)message, sessionID );
+    else
+    if( msgTypeValue == "D" )
+        onMessage( (const NewOrderSingle&)message, sessionID );
+    else
+    if( msgTypeValue == "F" )
+        onMessage( (const OrderCancelRequest&)message, sessionID );
+    else
+    if( msgTypeValue == "G" )
+        onMessage( (const OrderCancelReplaceRequest&)message, sessionID );
+    else
     if( msgTypeValue == "0" )
       onMessage( (const Heartbeat&)message, sessionID );
     else
@@ -255,9 +268,6 @@ public:
     if( msgTypeValue == "7" )
       onMessage( (const Advertisement&)message, sessionID );
     else
-    if( msgTypeValue == "8" )
-      onMessage( (const ExecutionReport&)message, sessionID );
-    else
     if( msgTypeValue == "9" )
       onMessage( (const OrderCancelReject&)message, sessionID );
     else
@@ -270,17 +280,8 @@ public:
     if( msgTypeValue == "C" )
       onMessage( (const Email&)message, sessionID );
     else
-    if( msgTypeValue == "D" )
-      onMessage( (const NewOrderSingle&)message, sessionID );
-    else
     if( msgTypeValue == "E" )
       onMessage( (const NewOrderList&)message, sessionID );
-    else
-    if( msgTypeValue == "F" )
-      onMessage( (const OrderCancelRequest&)message, sessionID );
-    else
-    if( msgTypeValue == "G" )
-      onMessage( (const OrderCancelReplaceRequest&)message, sessionID );
     else
     if( msgTypeValue == "H" )
       onMessage( (const OrderStatusRequest&)message, sessionID );
@@ -320,9 +321,6 @@ public:
     else
     if( msgTypeValue == "W" )
       onMessage( (const MarketDataSnapshotFullRefresh&)message, sessionID );
-    else
-    if( msgTypeValue == "X" )
-      onMessage( (const MarketDataIncrementalRefresh&)message, sessionID );
     else
     if( msgTypeValue == "Y" )
       onMessage( (const MarketDataRequestReject&)message, sessionID );
@@ -371,13 +369,19 @@ public:
     else onMessage( message, sessionID );
   }
   
-void crack( Message& message, 
-            const FIX::SessionID& sessionID )
+void crack( Message& message, const FIX::SessionID& sessionID )
   {
     FIX::MsgType msgType;
     message.getHeader().getField(msgType);
-    std::string msgTypeValue = msgType.getValue();
-    
+    const auto msgTypeValue = msgType.getValue();
+
+
+    if( msgTypeValue == "8" )
+          onMessage( (ExecutionReport&)message, sessionID );
+    else
+    if( msgTypeValue == "X" )
+        onMessage( (MarketDataIncrementalRefresh&)message, sessionID );
+    else
     if( msgTypeValue == "0" )
       onMessage( (Heartbeat&)message, sessionID );
     else
@@ -401,9 +405,6 @@ void crack( Message& message,
     else
     if( msgTypeValue == "7" )
       onMessage( (Advertisement&)message, sessionID );
-    else
-    if( msgTypeValue == "8" )
-      onMessage( (ExecutionReport&)message, sessionID );
     else
     if( msgTypeValue == "9" )
       onMessage( (OrderCancelReject&)message, sessionID );
@@ -467,9 +468,6 @@ void crack( Message& message,
     else
     if( msgTypeValue == "W" )
       onMessage( (MarketDataSnapshotFullRefresh&)message, sessionID );
-    else
-    if( msgTypeValue == "X" )
-      onMessage( (MarketDataIncrementalRefresh&)message, sessionID );
     else
     if( msgTypeValue == "Y" )
       onMessage( (MarketDataRequestReject&)message, sessionID );
