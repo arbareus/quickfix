@@ -61,38 +61,36 @@ public:
     crack( message, sessionID, beginString );
   }
 
-  void crack( const Message& message,
-              const SessionID& sessionID,
-              const BeginString& beginString )
+  void crack(const Message& message, const SessionID& sessionID, const BeginString& beginString)
   {
-    if ( beginString == BeginString_FIX40 )
-      ((FIX40::MessageCracker&)(*this)).crack((const FIX40::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIX41 )
-      ((FIX41::MessageCracker&)(*this)).crack((const FIX41::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIX42 )
-      ((FIX42::MessageCracker&)(*this)).crack((const FIX42::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIX43 )
-      ((FIX43::MessageCracker&)(*this)).crack((const FIX43::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIX44 )
-      ((FIX44::MessageCracker&)(*this)).crack((const FIX44::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIXT11 )
-    {
-      if( message.isAdmin() )
+      if (beginString == BeginString_FIX42)
+          ((FIX42::MessageCracker&)(*this)).crack((const FIX42::Message&)message, sessionID);
+      else if (beginString == BeginString_FIX44)
+          ((FIX44::MessageCracker&)(*this)).crack((const FIX44::Message&)message, sessionID);
+      else if (beginString == BeginString_FIX40)
+          ((FIX40::MessageCracker&)(*this)).crack((const FIX40::Message&)message, sessionID);
+      else if (beginString == BeginString_FIX41)
+          ((FIX41::MessageCracker&)(*this)).crack((const FIX41::Message&)message, sessionID);
+      else if (beginString == BeginString_FIX43)
+          ((FIX43::MessageCracker&)(*this)).crack((const FIX43::Message&)message, sessionID);
+      else if (beginString == BeginString_FIXT11)
       {
-        ((FIXT11::MessageCracker&)(*this)).crack((const FIXT11::Message&) message, sessionID);
-      }
-      else
-      {
-        ApplVerID applVerID;
-        if(!message.getHeader().getFieldIfSet(applVerID))
-        {
-          Session* pSession = Session::lookupSession( sessionID );
-          applVerID = pSession->getSenderDefaultApplVerID();
-        }
+          if (message.isAdmin())
+          {
+              ((FIXT11::MessageCracker&)(*this)).crack((const FIXT11::Message&)message, sessionID);
+          }
+          else
+          {
+              ApplVerID applVerID;
+              if (!message.getHeader().getFieldIfSet(applVerID))
+              {
+                  Session* pSession = Session::lookupSession(sessionID);
+                  applVerID = pSession->getSenderDefaultApplVerID();
+              }
 
-        crack( message, sessionID, applVerID );
+              crack(message, sessionID, applVerID);
+          }
       }
-    }
   }
 
   void crack( const Message& message,
@@ -126,38 +124,36 @@ public:
     crack( message, sessionID, beginString );
   }
 
-  void crack( Message& message,
-              const SessionID& sessionID,
-              const BeginString& beginString )
+  void crack(Message& message, const SessionID& sessionID, const BeginString& beginString)
   {
-    if ( beginString == BeginString_FIX40 )
-      ((FIX40::MessageCracker&)(*this)).crack((FIX40::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIX41 )
-      ((FIX41::MessageCracker&)(*this)).crack((FIX41::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIX42 )
-      ((FIX42::MessageCracker&)(*this)).crack((FIX42::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIX43 )
-      ((FIX43::MessageCracker&)(*this)).crack((FIX43::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIX44 )
-      ((FIX44::MessageCracker&)(*this)).crack((FIX44::Message&) message, sessionID);
-    else if ( beginString == BeginString_FIXT11 )
-    {
-      if( message.isAdmin() )
+      if (beginString == BeginString_FIX42)
+          ((FIX42::MessageCracker&)(*this)).crack((FIX42::Message&)message, sessionID);
+      else if (beginString == BeginString_FIX44)
+          ((FIX44::MessageCracker&)(*this)).crack((FIX44::Message&)message, sessionID);
+      else if (beginString == BeginString_FIX40)
+          ((FIX40::MessageCracker&)(*this)).crack((FIX40::Message&)message, sessionID);
+      else if (beginString == BeginString_FIX41)
+          ((FIX41::MessageCracker&)(*this)).crack((FIX41::Message&)message, sessionID);
+      else if (beginString == BeginString_FIX43)
+          ((FIX43::MessageCracker&)(*this)).crack((FIX43::Message&)message, sessionID);
+      else if (beginString == BeginString_FIXT11)
       {
-        ((FIXT11::MessageCracker&)(*this)).crack((FIXT11::Message&) message, sessionID);
-      }
-      else
-      {
-        ApplVerID applVerID;
-        if(!message.getHeader().getFieldIfSet(applVerID))
-        {
-          Session* pSession = Session::lookupSession( sessionID );
-          applVerID = pSession->getSenderDefaultApplVerID();
-        }
+          if (message.isAdmin())
+          {
+              ((FIXT11::MessageCracker&)(*this)).crack((FIXT11::Message&)message, sessionID);
+          }
+          else
+          {
+              ApplVerID applVerID;
+              if (!message.getHeader().getFieldIfSet(applVerID))
+              {
+                  Session* pSession = Session::lookupSession(sessionID);
+                  applVerID = pSession->getSenderDefaultApplVerID();
+              }
 
-        crack( message, sessionID, applVerID );
+              crack(message, sessionID, applVerID);
+          }
       }
-    }
   }
 
   void crack( Message& message,
